@@ -38,7 +38,7 @@ int main()
 	
 	//Calculating the median.
 	vector<double>::size_type mid = count/2;
-	int median = count % 2 == 0 ? (grades[mid-1]+grades[mid])/2 : grades[mid];
+	double median = count % 2 == 0 ? (grades[mid-1]+grades[mid])/2 : grades[mid];
 
 	streamsize def_prec = cout.precision();
 	
