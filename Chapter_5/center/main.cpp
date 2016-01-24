@@ -4,10 +4,12 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <cstdlib>
 
 using std::cout;		using std::cin;
 using std::string;		using std::vector;
 using std::endl;		using std::max;
+using std::getline;
 
 vector<string> center(const vector<string> &);
 
@@ -15,15 +17,15 @@ int main(){
 
 	//Reading from the input.
 	cout << "Please enter the number of line you would like to enter." << endl;
-	int num_lines;
-	cin >> num_lines;
+	string tmp;
+	getline(cin, tmp);
+	int num_lines = atof(tmp.c_str());
 	if (num_lines <= 0){
 		cout << "Invalid number of lines entered, exiting." << endl;
 		return -1;
 	}
 	cout << "Ok, please enter " << num_lines << " lines." << endl;
 
-	string tmp;
 	vector<string> input;
 	while(cin && num_lines-- > 0){
 		getline(cin, tmp);
@@ -43,7 +45,7 @@ int main(){
 vector<string> center(const vector<string> &input){
 
 	//Finding the maximum width
-	string::size_type max_len = -1;
+	string::size_type max_len = 0;
 	for(vector<string>::const_iterator iter = input.begin(); iter != input.end(); iter++)
 		max_len = max(max_len, iter->size());
 
