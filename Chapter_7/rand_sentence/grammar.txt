@@ -1,0 +1,36 @@
+<noun> Shahrooz
+<noun> Gisoo
+<noun> Pirooz
+<noun> Shizar
+<noun> Siavash
+<noun> <adjective> <noun>
+<adverb> happily 
+<adverb> angrily 
+<adverb> hurriedly 
+<adverb> gracefully 
+<adverb> brutally
+<adverb> purposefully
+<adverb> haphazardly
+<verb> killed 
+<verb> burried 
+<verb> oversaw 
+<verb> multiplied 
+<verb> surveyed 
+<verb> critiqued 
+<verb> mandated 
+<verb> accepted 
+<verb> cut 
+<verb> ate 
+<verb> utilized 
+<verb> kidnapped
+<verb> embraced
+<verb> kicked
+<verb> peeled
+<adjective> shapal
+<adjective> ziboo
+<adjective> old
+<adjective> beautiful
+<adjective> sarcastic
+<sentence> <noun> <adverb> <verb> <noun>
+<sentence> <noun> and <noun> <adverb> <verb> <noun>
+<sentence> <noun> <verb> into <noun>

@@ -1,8 +1,12 @@
 #include "split.h"
 #include <cctype>
+#include <algorithm>
+
+using std::vector;		using std::string;
+using std::find_if;
 
 bool not_space(char c){
-	return isalpha(c);
+	return (isalpha(c) || c == '<' || c == '>');
 }
 
 bool space(char c){
