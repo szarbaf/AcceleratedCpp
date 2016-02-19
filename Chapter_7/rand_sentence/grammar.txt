@@ -33,4 +33,3 @@
 <adjective> sarcastic
 <sentence> <noun> <adverb> <verb> <noun>
 <sentence> <noun> and <noun> <adverb> <verb> <noun>
-<sentence> <noun> <verb> into <noun>
