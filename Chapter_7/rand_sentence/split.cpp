@@ -2,8 +2,9 @@
 #include <cctype>
 #include <algorithm>
 
-using std::vector;		using std::string;
-using std::find_if;
+
+using std::list;		using std::string;
+using std::find_if;		
 
 bool not_space(char c){
 	return (isalpha(c) || c == '<' || c == '>');
@@ -13,9 +14,9 @@ bool space(char c){
 	return !not_space(c);
 }
 
-vector<string> split(string line){
+list<string> split(string line){
 
-	vector<string> ret;
+	list<string> ret;
 	iter_string b = line.begin(), e = line.end();
 	
 	while(b != e){

@@ -7,6 +7,9 @@
 #include <algorithm>
 #include <cctype>
 
+//The maximum number of characters to be shown on each line for the xref output.
+#define MAX_LINE_SIZE 30
+
 using std::map;		using std::vector;
 using std::cin;		using std::cout;
 using std::ifstream;using std::string;
@@ -19,6 +22,7 @@ typedef string::const_iterator iter_string;
 
 vector<string> split(string);
 map <string, vector<int> > xref(ifstream&);
+int num_digits(int num);
 
 int main(){
 
@@ -33,12 +37,25 @@ int main(){
 	for (map_iter word = table.begin(); word != table.end(); word++){
 
 		//Printing the word.
-		cout << word->first << " : ";
+		string title(word->first + " : ");
+		cout << title;
 		//Printing the line numbers.
 		vector <int> lines = word->second;
 		cout << lines[0];
-		for (vector<int>::const_iterator iter = lines.begin()+1; iter != lines.end(); iter++)
-			cout <<", " << *iter;
+		int line_size = title.size();
+		for (vector<int>::const_iterator iter = lines.begin()+1; iter != lines.end(); iter++){
+			//Making sure that the output lines are not too large.
+			int num_d = num_digits(*iter);
+			if (line_size+num_d+2 < MAX_LINE_SIZE){
+				cout <<", " << *iter;
+				line_size += num_d;
+			}
+			else{
+				cout << endl;
+				cout <<", " << *iter;
+				line_size = num_d;
+			}
+		}
 		cout << endl;
 	}
 
@@ -93,4 +110,14 @@ vector<string> split(string line){
 	}
 
 	return ret;
+}
+
+int num_digits(int num){
+	int counter = 0;
+	while (num > 0){
+		counter++;
+		num /= 10;
+	}
+
+	return counter;
 }

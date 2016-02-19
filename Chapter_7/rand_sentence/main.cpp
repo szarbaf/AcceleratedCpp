@@ -39,7 +39,7 @@ int main(){
 	cout << "The generated sentences are as follows:" << endl;
 	for (iter_Rule_col iter_col = sentences.begin(); iter_col != sentences.end(); iter_col++){
 		iter_Rule iter_rule = iter_col->begin();
-		cout << iter_rule[0];
+		cout << *iter_rule->begin();
 		iter_rule++;
 		for (; iter_rule != iter_col->end(); iter_rule++)
 			cout << " " << *iter_rule;

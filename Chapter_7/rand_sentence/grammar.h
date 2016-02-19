@@ -1,9 +1,9 @@
 #include <iostream>
-#include <vector>
+#include <list>
 #include <map>
 
-typedef std::vector<std::string> Rule;
-typedef std::vector<Rule> Rule_collection;
+typedef std::list<std::string> Rule;
+typedef std::list<Rule> Rule_collection;
 typedef std::map<std::string, Rule_collection > Grammar;
 
 typedef Rule::const_iterator iter_Rule;

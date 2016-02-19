@@ -7,7 +7,7 @@
 #include <cmath>
 #include <algorithm>
 
-using std::vector;		using std::string;
+using std::list;		using std::string;
 using std::ifstream;	using std::getline;
 using std::rand;		using std::floor;
 using std::copy;		using std::back_inserter;
@@ -23,9 +23,12 @@ Grammar read_grammar(string grammar_file){
 	string line;
 	while(getline(fp, line)){		
 		Rule splitted = split(line);
+		Rule::iterator first = splitted.begin();
+		Rule::iterator second = first;
+		second++;
 		if (!splitted.empty())
-			ret[splitted[0]].push_back(
-					Rule(splitted.begin()+1, splitted.end()) );
+			ret[*first].push_back(
+					Rule(second, splitted.end()) );
 	}
 	
 	fp.close();
@@ -48,7 +51,10 @@ Rule gen_aux(const Grammar &gram, string category){
 	//Choosing one of the rules randomly.
 	const Rule_collection &rule_col = rule_col_iter->second;
 	int rand_num = randn_gen(rule_col.size());
-	Rule chosen_rule = rule_col[rand_num];
+	iter_Rule_col chosen_rule_iter = rule_col.begin();
+	for (int i = 0; i < rand_num; i++)
+		chosen_rule_iter++;
+	Rule chosen_rule = *chosen_rule_iter;
 	//Expanding the rule.
 	Rule ret;
 

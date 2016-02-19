@@ -1,6 +1,6 @@
 #include <iostream>
-#include <vector>
+#include <list>
 
 typedef std::string::const_iterator iter_string;
 
-std::vector<std::string> split(std::string);
+std::list<std::string> split(std::string);
