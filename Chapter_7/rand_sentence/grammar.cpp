@@ -6,11 +6,13 @@
 #include <cstdlib>
 #include <cmath>
 #include <algorithm>
+#include <stack>
 
 using std::list;		using std::string;
 using std::ifstream;	using std::getline;
 using std::rand;		using std::floor;
 using std::copy;		using std::back_inserter;
+using std::stack;
 
 Grammar read_grammar(string grammar_file){
 
@@ -92,4 +94,49 @@ bool bracketed(string name){
 		return true;
 	else
 		return false;
+}
+
+Rule gen_aux_nonRecursive(const Grammar &gram, string category){
+	
+	//Retrieving the corresponding rule collection.
+	Grammar::const_iterator rules = gram.find(category);
+	if (rules == gram.end())
+		throw "Empty category.\n";
+	//Choosing a random rule out of the collection.
+	const Rule_collection &tmp = rules->second;
+	int rand_num = randn_gen(tmp.size());
+
+	iter_Rule_col chosen_rule_iter;
+	for (int counter = 0; counter < rand_num; counter++)
+		chosen_rule_iter++;
+	const Rule &chosen_rule = *chosen_rule_iter;
+
+	//Generating the output. Using stacks for the rule and output.
+	//Initializing the rule stack.
+	stack<string> rule_stack;
+	for (Rule::reverse_iterator iter = chosen_rule.rbegin(); iter != chosen_rule.rend(); iter++)
+		rule_stack.push(*iter);
+	
+	stack<string> ret_stack;
+	while (!rule_stack.empty()){
+		const string &item = rule_stack.top();
+		rule_stack.pop();
+		if (bracketed(item)){
+			Rule rule = grab_rule(gram, item);
+			for (iter_Rule iter = rule.begin(); iter != rule.end(); iter++)
+				rule_stack.push(*iter);
+		}
+		else
+			ret_stack.push(*item);
+	}
+	
+	//Outputting and reversing the generated sentence.
+	Rule ret;
+	while (!ret_stack.empty()){
+		ret.push_back(ret_stack.top());
+		ret_stack.pop();
+	}
+
+
+	return ret;
 }
