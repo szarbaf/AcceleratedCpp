@@ -40,7 +40,7 @@ Grammar read_grammar(string grammar_file){
 Rule gen_sentence(Grammar gram){
 
 	Rule ret;
-	ret = gen_aux(gram, "<sentence>");
+	ret = gen_aux_nonRecursive(gram, "<sentence>");
 	return ret;
 }
 
@@ -97,24 +97,13 @@ bool bracketed(string name){
 }
 
 Rule gen_aux_nonRecursive(const Grammar &gram, string category){
-	
-	//Retrieving the corresponding rule collection.
-	Grammar::const_iterator rules = gram.find(category);
-	if (rules == gram.end())
-		throw "Empty category.\n";
-	//Choosing a random rule out of the collection.
-	const Rule_collection &tmp = rules->second;
-	int rand_num = randn_gen(tmp.size());
 
-	iter_Rule_col chosen_rule_iter;
-	for (int counter = 0; counter < rand_num; counter++)
-		chosen_rule_iter++;
-	const Rule &chosen_rule = *chosen_rule_iter;
-
+	Rule chosen_rule = grab_rule(gram, category) ;
+		
 	//Generating the output. Using stacks for the rule and output.
 	//Initializing the rule stack.
 	stack<string> rule_stack;
-	for (Rule::reverse_iterator iter = chosen_rule.rbegin(); iter != chosen_rule.rend(); iter++)
+	for (Rule::const_iterator iter = chosen_rule.begin(); iter != chosen_rule.end(); iter++)
 		rule_stack.push(*iter);
 	
 	stack<string> ret_stack;
@@ -127,7 +116,7 @@ Rule gen_aux_nonRecursive(const Grammar &gram, string category){
 				rule_stack.push(*iter);
 		}
 		else
-			ret_stack.push(*item);
+			ret_stack.push(item);
 	}
 	
 	//Outputting and reversing the generated sentence.
@@ -139,4 +128,21 @@ Rule gen_aux_nonRecursive(const Grammar &gram, string category){
 
 
 	return ret;
+}
+
+Rule grab_rule(Grammar gram, string category){
+	
+	//Retrieving the corresponding rule collection.
+	Grammar::const_iterator rules = gram.find(category);
+	if (rules == gram.end())
+		throw "Empty category.\n";
+	//Choosing a random rule out of the collection.
+	const Rule_collection &tmp = rules->second;
+	int rand_num = randn_gen(tmp.size());
+
+	iter_Rule_col chosen_rule_iter = tmp.begin();
+	for (int counter = 0; counter < rand_num; counter++)
+		chosen_rule_iter++;
+	
+	return *chosen_rule_iter;
 }

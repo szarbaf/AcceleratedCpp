@@ -15,3 +15,5 @@ Rule gen_sentence(Grammar gram);
 Rule gen_aux(const Grammar &gram, std::string category);
 int randn_gen(Rule_col_num range);
 bool bracketed(std::string name);
+Rule gen_aux_nonRecursive(const Grammar &gram, std::string category);
+Rule grab_rule(Grammar gram, std::string category);
