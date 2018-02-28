@@ -12,8 +12,11 @@ class student_class
 		void show_info() const;
 		student_class(std::istream &in);
 		student_class(std::string name, double mid_term, double final_exam) : name_(name), mid_term_(mid_term), final_exam_(final_exam) {}
-		std::string GetName() {return name_;}
+		std::string GetName() const {return name_;}
+		
+		double GetTotalGrade() const {return total_grade_;}
 		bool grade();
+		
 		bool valid() {return name_.size();}
 
 	private:
