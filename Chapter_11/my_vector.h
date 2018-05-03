@@ -1,4 +1,4 @@
-
+#include <iostream>
 
 template <class T>
 class MyVector{
@@ -6,7 +6,7 @@ class MyVector{
 
 	typedef T* iterator;
 	typedef const T* const_iterator;
-	typedef size_t size_type;
+	typedef std::size_t size_type;
 	typedef T value_type;
 
 	MyVector() {create();}
